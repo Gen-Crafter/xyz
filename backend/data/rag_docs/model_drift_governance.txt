@@ -1,0 +1,13 @@
+﻿Model Drift Governance Playbook
+
+Trigger condition:
+- Production model receives new personal-data fields outside registered scope.
+
+Required controls:
+- Mark incident as scope-drift event and pause affected decision flow.
+- Conduct DPIA and update data contract before re-enable.
+- Add input validation to reject unauthorized fields.
+- Record governance decision and owner approvals.
+
+Citations:
+- GDPR Art.5(1)(b), GDPR Art.22, GDPR Art.35, NIST AI RMF GOVERN and MANAGE.

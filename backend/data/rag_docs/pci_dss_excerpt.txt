@@ -1,0 +1,5 @@
+PCI DSS Requirement 3 requires protecting stored account data and rendering PAN unreadable through truncation, hashing, tokenization, or strong cryptography.
+PCI DSS Requirement 4 requires strong cryptography and security protocols when transmitting cardholder data over open networks.
+PCI DSS Requirement 7 requires restricting access to cardholder data by business need-to-know.
+PCI DSS Requirement 10 requires logging and monitoring all access to network resources and cardholder data.
+PCI DSS Requirement 12 requires a security policy, risk assessments, and incident response process for cardholder environments.

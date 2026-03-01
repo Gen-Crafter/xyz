@@ -1,0 +1,17 @@
+﻿Cross-Regulation Conflict Map: GDPR vs HIPAA
+
+Conflict:
+- GDPR Article 17 supports erasure requests.
+- HIPAA operational and documentation obligations can require retention.
+
+Resolution strategy 1: Selective de-identification.
+- Remove direct identifiers while retaining minimum lawful record set.
+
+Resolution strategy 2: Pseudonymized vault retention.
+- Store restricted reference data in controlled vault with legal access controls.
+
+Resolution strategy 3: Policy-based deletion workflow.
+- Evaluate legal exceptions, record decision rationale, and execute approved deletion scope.
+
+Citations:
+- GDPR Art.17, GDPR Art.6, HIPAA 164.502, HIPAA 164.308.

@@ -1,0 +1,13 @@
+﻿Cross-Regulation Conflict Map: GDPR vs PCI-DSS
+
+Conflict:
+- GDPR Articles 44-49 constrain transfer of EU personal data.
+- PCI DSS Requirement 3 requires strict protection of account data when retained.
+
+Bridge approach:
+- Tokenize or format-preserving-encrypt PAN before transfer.
+- Use SCC or adequacy mechanisms when EU-origin data crosses borders.
+- Restrict transfer to minimum fields required for card-processing objective.
+
+Citations:
+- GDPR Art.44, GDPR Art.46, PCI DSS Req 3.3, Req 3.4.

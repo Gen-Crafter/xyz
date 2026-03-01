@@ -1,0 +1,4 @@
+Control Pattern CP-001: For GDPR erasure and HIPAA retention conflicts, remove direct identifiers while retaining pseudonymized clinical facts plus immutable audit reference for required retention period.
+Control Pattern CP-002: For PCI data exposure risk, tokenize PAN before model ingestion and prohibit raw PAN in logs or analytics exports.
+Control Pattern CP-003: For cross-border transfers, execute regional inference and export only aggregated or anonymized outputs with approved transfer safeguards.
+Control Pattern CP-004: For missing audit evidence, enforce lineage event capture at each transformation edge with signed metadata and time-stamped provenance.

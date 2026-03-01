@@ -1,0 +1,15 @@
+﻿GDPR Cross-Border Data Transfers (Articles 44-49)
+
+Article 44:
+- Any transfer to third countries requires GDPR-level protection.
+
+Article 46:
+- Appropriate safeguards may include Standard Contractual Clauses (SCCs).
+
+Articles 45-49:
+- Adequacy decisions can permit transfer to approved jurisdictions.
+- Derogations are limited and must be narrowly interpreted.
+
+Operational mapping:
+- Export from EU workloads requires adequacy or SCC evidence before release.
+- Missing transfer mechanism should trigger block and remediation workflow.

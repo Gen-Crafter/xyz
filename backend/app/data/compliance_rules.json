@@ -1,0 +1,82 @@
+[
+  {
+    "text": "GDPR Article 6(1): Processing of personal data is lawful only if the data subject has given consent, processing is necessary for a contract, legal obligation, vital interests, public task, or legitimate interests. Personal data includes names, email addresses, phone numbers, and any information relating to an identified or identifiable natural person.",
+    "metadata": {"regulation": "GDPR", "article": "Art. 6(1)", "category": "PII", "entity_types": "EMAIL,PHONE,NAME,ADDRESS"}
+  },
+  {
+    "text": "GDPR Article 9(1): Processing of special categories of personal data is prohibited unless explicit consent is given. Special categories include racial/ethnic origin, political opinions, religious beliefs, genetic data, biometric data, health data, and national identification numbers such as Social Security Numbers (SSN), passport numbers, and national ID numbers.",
+    "metadata": {"regulation": "GDPR", "article": "Art. 9(1)", "category": "PII", "entity_types": "SSN,PASSPORT,NATIONAL_ID,DATE_OF_BIRTH"}
+  },
+  {
+    "text": "GDPR Article 4(1): Personal data means any information relating to an identified or identifiable natural person. An identifiable natural person is one who can be identified by reference to an identifier such as a name, identification number, location data, online identifier (IP address), or factors specific to that person.",
+    "metadata": {"regulation": "GDPR", "article": "Art. 4(1)", "category": "PII", "entity_types": "IP_ADDRESS,LOCATION,ONLINE_IDENTIFIER"}
+  },
+  {
+    "text": "GDPR Article 5(1)(c): Personal data shall be adequate, relevant and limited to what is necessary in relation to the purposes for which they are processed (data minimisation). Collecting excessive personal data such as dates of birth, home addresses, or biometric data beyond what is needed violates this principle.",
+    "metadata": {"regulation": "GDPR", "article": "Art. 5(1)(c)", "category": "PII", "entity_types": "DATE_OF_BIRTH,ADDRESS,BIOMETRIC"}
+  },
+  {
+    "text": "GDPR Article 44: Any transfer of personal data to a third country or international organisation shall take place only if adequate safeguards exist. Exporting personal data, transferring records to external vendors, or sending data to services outside the EU/EEA without Standard Contractual Clauses or adequacy decisions is prohibited.",
+    "metadata": {"regulation": "GDPR", "article": "Art. 44", "category": "DATA_TRANSFER", "entity_types": "EXPORT,TRANSFER,EXTERNAL"}
+  },
+  {
+    "text": "GDPR Article 28: Where processing is carried out by an external processor on behalf of a controller, the controller shall use only processors providing sufficient guarantees. Sharing personal data with external third-party services, vendors, or AI platforms requires a data processing agreement.",
+    "metadata": {"regulation": "GDPR", "article": "Art. 28", "category": "DATA_TRANSFER", "entity_types": "EXTERNAL,VENDOR,THIRD_PARTY"}
+  },
+  {
+    "text": "GDPR Article 87: Member States may further determine the specific conditions for processing a national identification number or any other identifier of general application. Social security numbers, passport numbers, and government-issued IDs require specific additional safeguards under national law.",
+    "metadata": {"regulation": "GDPR", "article": "Art. 87", "category": "PII", "entity_types": "SSN,PASSPORT,NATIONAL_ID"}
+  },
+  {
+    "text": "GDPR Article 32: The controller and processor shall implement appropriate technical and organisational measures to ensure security appropriate to the risk, including encryption of personal data, pseudonymisation, ensuring confidentiality and integrity of processing systems. Transmitting unencrypted personal data is a violation.",
+    "metadata": {"regulation": "GDPR", "article": "Art. 32", "category": "SECURITY", "entity_types": "ENCRYPTION,SECURITY"}
+  },
+  {
+    "text": "HIPAA 45 CFR §164.502(a): A covered entity may not use or disclose protected health information except as permitted or required. PHI includes any information about health status, provision of healthcare, or payment for healthcare that can be linked to an individual. Keywords indicating PHI include: patient, diagnosis, treatment, prescription, medical history, clinical, health record.",
+    "metadata": {"regulation": "HIPAA", "article": "§164.502(a)", "category": "PHI", "entity_types": "PATIENT,DIAGNOSIS,TREATMENT,PRESCRIPTION,MEDICAL_HISTORY"}
+  },
+  {
+    "text": "HIPAA 45 CFR §164.514(b)(2): The Safe Harbor method of de-identification requires removal of 18 types of identifiers including names, geographic data, dates, phone numbers, fax numbers, email addresses, Social Security numbers, medical record numbers (MRN), health plan beneficiary numbers, account numbers, certificate/license numbers, vehicle identifiers, device identifiers, web URLs, IP addresses, biometric identifiers, full-face photographs, and any other unique identifying number.",
+    "metadata": {"regulation": "HIPAA", "article": "§164.514(b)(2)", "category": "PHI", "entity_types": "MEDICAL_RECORD_NUMBER,MRN,HEALTH_PLAN_ID"}
+  },
+  {
+    "text": "HIPAA 45 CFR §164.501: Individually identifiable health information includes demographic data, diagnostic codes (ICD-10, CPT), lab results, medication records, treatment plans, and any information that identifies or could identify a patient. ICD-10 codes like E11.9 (diabetes), I10 (hypertension), and diagnostic information linked to individuals constitute PHI.",
+    "metadata": {"regulation": "HIPAA", "article": "§164.501", "category": "PHI", "entity_types": "ICD10_CODE,DIAGNOSIS_CODE,LAB_RESULT,MEDICATION"}
+  },
+  {
+    "text": "HIPAA 45 CFR §164.506: A covered entity may use or disclose PHI for treatment, payment, or healthcare operations without individual authorization. However, sharing PHI with non-covered entities (external AI services, third-party analytics) requires explicit patient authorization or a valid Business Associate Agreement (BAA).",
+    "metadata": {"regulation": "HIPAA", "article": "§164.506", "category": "PHI", "entity_types": "TREATMENT,PAYMENT,HEALTHCARE_OPERATIONS"}
+  },
+  {
+    "text": "HIPAA 45 CFR §164.312(a)(1): Technical safeguards require implementing access controls to electronic PHI. Only authorized persons or software programs should access ePHI. Sending patient data to unauthorized AI systems or external platforms without access controls is a violation.",
+    "metadata": {"regulation": "HIPAA", "article": "§164.312(a)(1)", "category": "PHI", "entity_types": "ACCESS_CONTROL,AUTHORIZATION"}
+  },
+  {
+    "text": "PCI DSS Requirement 3.4: Render the Primary Account Number (PAN) unreadable anywhere it is stored using one-way hash functions, truncation, index tokens, or strong cryptography. Credit card numbers, debit card numbers, and payment card PANs must never appear in plaintext in logs, AI prompts, exports, or data transfers.",
+    "metadata": {"regulation": "PCI-DSS", "article": "Req 3.4", "category": "PCI", "entity_types": "CREDIT_CARD,DEBIT_CARD,PAN"}
+  },
+  {
+    "text": "PCI DSS Requirement 3.2: Do not store sensitive authentication data after authorization, even if encrypted. Sensitive authentication data includes full track data from the magnetic stripe, card verification codes (CVV, CVC, CVV2, CID), and PINs or encrypted PIN blocks.",
+    "metadata": {"regulation": "PCI-DSS", "article": "Req 3.2", "category": "PCI", "entity_types": "CVV,CVC,PIN,TRACK_DATA"}
+  },
+  {
+    "text": "PCI DSS Requirement 3.1: Keep cardholder data storage to a minimum. Implement data retention and disposal policies. Cardholder data includes the primary account number, cardholder name, expiration date, and service code.",
+    "metadata": {"regulation": "PCI-DSS", "article": "Req 3.1", "category": "PCI", "entity_types": "CARDHOLDER,EXPIRATION_DATE,SERVICE_CODE"}
+  },
+  {
+    "text": "PCI DSS Requirement 4.1: Use strong cryptography and security protocols such as TLS 1.2 or higher to safeguard sensitive cardholder data during transmission over open, public networks. Transmitting credit card information over unencrypted channels or to external AI services is prohibited.",
+    "metadata": {"regulation": "PCI-DSS", "article": "Req 4.1", "category": "PCI", "entity_types": "TRANSMISSION,ENCRYPTION"}
+  },
+  {
+    "text": "ISO 27001 Annex A.9.4.3: Secret authentication information such as passwords, API keys, access tokens, private keys, and database connection strings must be controlled through a formal management process. These credentials must never be exposed in logs, transmitted to external services, or included in AI prompts or outputs.",
+    "metadata": {"regulation": "ISO 27001", "article": "A.9.4.3", "category": "SECRET", "entity_types": "API_KEY,PASSWORD,ACCESS_TOKEN,PRIVATE_KEY"}
+  },
+  {
+    "text": "ISO 27001 Annex A.10.1.2: Cryptographic keys must be protected throughout their lifecycle. Private keys, signing keys, and encryption keys must never be disclosed, transmitted to external parties, or included in data exports. Key management policies must ensure keys are generated, stored, and destroyed securely.",
+    "metadata": {"regulation": "ISO 27001", "article": "A.10.1.2", "category": "SECRET", "entity_types": "PRIVATE_KEY,SIGNING_KEY,ENCRYPTION_KEY"}
+  },
+  {
+    "text": "ISO 27001 Annex A.14.1.2: Information involved in application services passing over public networks shall be protected from fraudulent activity, contract dispute, and unauthorized disclosure. Database connection strings containing credentials (host, port, username, password) and AWS access keys (AKIAIOSFODNN7EXAMPLE format) must not be exposed.",
+    "metadata": {"regulation": "ISO 27001", "article": "A.14.1.2", "category": "SECRET", "entity_types": "DB_CONNECTION_STRING,AWS_KEY,AWS_SECRET"}
+  }
+]

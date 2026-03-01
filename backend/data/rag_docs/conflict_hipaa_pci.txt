@@ -1,0 +1,12 @@
+﻿Cross-Regulation Conflict Map: HIPAA vs PCI-DSS
+
+Conflict:
+- HIPAA and PCI both require strong logging and control evidence, but retention and log format expectations can differ.
+
+Resolution pattern:
+- Maintain dual-archive logging strategy with mapping index.
+- Ensure both healthcare and card-data events are retained per policy.
+- Apply unified incident response process with domain-specific evidence packs.
+
+Citations:
+- HIPAA 164.312(b), PCI DSS Req 10.2, PCI DSS Req 10.7.

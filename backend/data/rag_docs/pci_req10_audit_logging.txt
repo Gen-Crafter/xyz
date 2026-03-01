@@ -1,0 +1,8 @@
+﻿PCI DSS v4.0 Requirement 10: Log and Monitor Access
+
+Requirement focus:
+- Record user activity, privileged actions, and security events.
+- Retain and protect logs for investigation and audit.
+
+Operational mapping:
+- Missing card-data audit events should increase risk and block closure of incidents.

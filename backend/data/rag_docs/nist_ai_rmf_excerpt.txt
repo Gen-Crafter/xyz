@@ -1,0 +1,5 @@
+NIST AI RMF identifies govern, map, measure, and manage functions for trustworthy AI risk management.
+The govern function requires policies, accountability, and organizational roles for AI risk.
+The map function requires context and impact analysis, including affected stakeholders and legal constraints.
+The measure function requires metrics for risk likelihood and severity across lifecycle stages.
+The manage function requires prioritization and treatment actions with continuous monitoring feedback loops.

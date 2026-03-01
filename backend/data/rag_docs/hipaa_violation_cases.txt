@@ -1,0 +1,16 @@
+﻿HIPAA Incident References (Curated Case Notes)
+
+Case pattern A:
+- Large healthcare analytics configuration exposed patient-related data to external ad/analytics stack.
+- Root cause: insufficient PHI boundary controls and third-party governance.
+
+Case pattern B:
+- Vendor PHI access proceeded without completed BAA.
+- Root cause: missing business-associate onboarding controls.
+
+Case pattern C:
+- Ransomware precursor conditions existed where sensitive healthcare data paths lacked adequate controls.
+- Root cause: weak encryption and monitoring posture.
+
+Operational lesson:
+- Early detection and policy-enforced blocking materially reduce breach impact and remediation cost.

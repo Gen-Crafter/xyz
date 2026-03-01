@@ -1,0 +1,9 @@
+﻿HIPAA Privacy and Security Rule: Business Associate Agreement Requirements
+
+Sections 164.308(b)(1) and 164.502(e):
+- A Business Associate Agreement (BAA) is required before vendor PHI access.
+- Agreement must define safeguards, permitted uses, and breach duties.
+
+Operational mapping:
+- Vendor or analytics access without BAA should be blocked or quarantined.
+- Restore access only after BAA and technical safeguards are validated.

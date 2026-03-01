@@ -1,0 +1,11 @@
+﻿HIPAA Privacy Rule: Permitted and Prohibited Disclosures
+
+Section 164.502:
+- Use and disclose PHI only as permitted or required by rule.
+- Unauthorized disclosures are compliance events requiring investigation.
+
+Section 164.508:
+- Authorization is required for uses outside treatment, payment, and operations.
+
+Operational mapping:
+- External destinations and non-routine disclosures require explicit policy checks.

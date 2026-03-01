@@ -1,0 +1,9 @@
+﻿NIST AI RMF 1.0: MANAGE Function Notes
+
+MANAGE guidance emphasizes:
+- Prioritizing response actions and corrective plans.
+- Tracking remediation progress to closure.
+- Updating controls and lifecycle decisions from incident learnings.
+
+Operational mapping:
+- Drift and shadow AI incidents should trigger corrective playbooks and re-approval workflow.

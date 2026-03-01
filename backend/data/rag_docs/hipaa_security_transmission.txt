@@ -1,0 +1,9 @@
+﻿HIPAA Security Rule: Transmission Security (Section 164.312(e))
+
+Control expectations:
+- Protect ePHI during electronic transmission.
+- Implement integrity controls to guard against unauthorized alteration.
+- Use encryption where appropriate for transmission risk.
+
+Operational mapping:
+- No-TLS or plaintext PHI transfer should trigger immediate pause and remediation.

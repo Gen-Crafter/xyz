@@ -1,0 +1,9 @@
+﻿PCI Compliance Exposure and Cost Impact (Curated Notes)
+
+Observed impact patterns:
+- Ongoing non-compliance can trigger recurring financial penalties and card-brand escalations.
+- Remediation costs include incident response, forensics, re-architecture, and audit cycles.
+- Training environments unintentionally brought into PCI scope create hidden control debt.
+
+Operational lesson:
+- Detect and block raw PAN usage early in data-science workflows.

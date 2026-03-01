@@ -1,0 +1,9 @@
+﻿NIST AI RMF 1.0: MEASURE Function Notes
+
+MEASURE guidance emphasizes:
+- Continuous monitoring for performance, drift, and harmful outcomes.
+- Validation signals and thresholds for action.
+- Evidence capture for auditability and assurance.
+
+Operational mapping:
+- Drift detection thresholds should raise compliance events before business impact grows.

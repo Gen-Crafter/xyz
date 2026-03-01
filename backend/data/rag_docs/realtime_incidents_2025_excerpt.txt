@@ -1,0 +1,49 @@
+ADCL Incident Grounding Pack (2024-2025 Excerpts)
+
+Section 1 - Misconfigured Analytics on PHI (Healthcare)
+Pattern: Patient analytics tags forwarded PHI and identifiers to an external analytics stack without a signed BAA.
+Controls:
+- Disable direct PHI export to third-party analytics collectors.
+- Apply field-level masking for patient identifiers before analytics processing.
+- Execute BAA review and breach-assessment workflow under HIPAA Privacy Rule safeguards.
+Regulatory mapping: HIPAA 164.502(e), HIPAA 164.308(b)(1), GDPR Art.44 transfer safeguards.
+
+Section 2 - Vendor Access Without BAA
+Pattern: External vendor receives PHI access before BAA execution and security scoping.
+Controls:
+- Quarantine vendor identity and block PHI access paths immediately.
+- Require signed BAA and least-privilege access policy before re-enable.
+- Record control evidence and reviewer approval in immutable audit logs.
+Regulatory mapping: HIPAA 164.308(b)(1), HIPAA 164.502(e).
+
+Section 3 - Raw PAN in ML Training
+Pattern: Production payment data with raw PAN is copied into model training workflows.
+Controls:
+- Halt training if raw PAN or track data is detected.
+- Replace data with tokenized, masked, or synthetic equivalents.
+- Apply PCI scoping review for training environment boundary.
+Regulatory mapping: PCI-DSS Req 3.3, Req 3.4, GDPR Art.5 purpose limitation.
+
+Section 4 - Unencrypted PHI Transit
+Pattern: ePHI is transmitted over internal or partner channels without TLS and encryption-at-rest controls.
+Controls:
+- Enforce TLS 1.2+ for all PHI links.
+- Enforce encryption at rest for PHI storage zones.
+- Run risk analysis and document residual risk after remediation.
+Regulatory mapping: HIPAA Security Rule 164.312(e)(1), 164.312(a)(2)(iv), 164.308(a)(1).
+
+Section 5 - Model Drift Scope Violation
+Pattern: Production model begins consuming out-of-scope personal data fields not included in original registration.
+Controls:
+- Reject out-of-scope fields at ingestion gateway.
+- Trigger model re-registration and DPIA review when drift detected.
+- Create AI incident record and owner assignment.
+Regulatory mapping: GDPR Art.5(1)(b), GDPR Art.22, GDPR Art.35, NIST AI RMF Govern.
+
+Section 6 - Shadow IT External LLM Export
+Pattern: Employee or customer PII is sent to unapproved external LLM endpoints.
+Controls:
+- Block unapproved external LLM endpoints pre-flight.
+- Route requests to approved local or contracted enterprise LLM endpoint.
+- Require DPA and lawful-basis evidence before external processing.
+Regulatory mapping: GDPR Art.6 lawful basis, Art.28 processor obligations, Art.44 transfers.

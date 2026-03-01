@@ -1,0 +1,8 @@
+﻿HIPAA Security Rule: Risk Analysis and Management (Section 164.308(a)(1))
+
+Control expectations:
+- Conduct accurate and thorough risk analysis for ePHI confidentiality, integrity, and availability.
+- Implement risk management process and sanctions policy.
+
+Operational mapping:
+- High-risk findings must generate tracked mitigation actions and owner accountability.

@@ -1,0 +1,14 @@
+﻿GDPR Privacy by Design and Default (Article 25)
+
+Article 25 requires controllers to implement privacy by design and by default.
+- Build technical and organizational controls into system architecture.
+- Default settings must minimize collection, access, and exposure.
+- Apply pseudonymization where feasible for risk reduction.
+- Maintain evidence that safeguards were considered during design.
+
+Recital 78 alignment:
+- Encourage data minimization, processing limitation, and secure handling.
+- Require measures supporting timely compliance verification.
+
+Operational mapping:
+- New model inputs or data fields should trigger privacy-by-design review.

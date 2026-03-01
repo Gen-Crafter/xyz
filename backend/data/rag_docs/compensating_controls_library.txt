@@ -1,0 +1,41 @@
+﻿Compensating Controls Library (Condensed)
+
+1) conflict_type: HIPAA_EXTERNAL_ANALYTICS_DISCLOSURE
+control_name: Analytics PHI Masking Gate
+implementation: Mask identifiers and block export until BAA verified.
+citations: HIPAA 164.502(e), GDPR Art.44
+
+2) conflict_type: HIPAA_VENDOR_ACCESS_NO_BAA
+control_name: Vendor Quarantine and BAA Workflow
+implementation: Suspend vendor path, validate BAA, re-enable least privilege.
+citations: HIPAA 164.308(b)(1), HIPAA 164.502(e)
+
+3) conflict_type: PCI_RAW_PAN_TRAINING
+control_name: PAN Tokenization Pre-Training Gate
+implementation: Halt training on raw PAN and enforce tokenized datasets only.
+citations: PCI DSS Req 3.3, Req 3.4
+
+4) conflict_type: HIPAA_UNENCRYPTED_PHI_TRANSMISSION
+control_name: PHI Transport Encryption Enforcement
+implementation: Require TLS and at-rest encryption before workflow resume.
+citations: HIPAA 164.312(e), HIPAA 164.312(a)
+
+5) conflict_type: GDPR_MODEL_DRIFT_SCOPE_BREAK
+control_name: Drift Scope Guardrail
+implementation: Reject out-of-scope fields and trigger DPIA workflow.
+citations: GDPR Art.5, Art.35, Art.22
+
+6) conflict_type: GDPR_SHADOW_IT_LLM_EXPORT
+control_name: External LLM Egress Block
+implementation: Block external endpoint and route to approved local LLM.
+citations: GDPR Art.6, Art.28, Art.44
+
+7) conflict_type: GDPR_CROSS_BORDER_TRANSFER
+control_name: Transfer Safeguard Checkpoint
+implementation: Validate SCC or adequacy before export release.
+citations: GDPR Art.44-49
+
+8) conflict_type: GDPR_ERASURE_VS_HIPAA_RETENTION
+control_name: Selective Erasure with Legal Hold
+implementation: Execute scoped deletion while retaining lawful minimum records.
+citations: GDPR Art.17, HIPAA 164.502

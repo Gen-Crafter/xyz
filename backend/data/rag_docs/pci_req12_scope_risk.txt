@@ -1,0 +1,9 @@
+﻿PCI DSS v4.0 Requirement 12: Security Governance and Scope Management
+
+Requirement focus:
+- Define and maintain security responsibilities and risk program.
+- Manage third-party service provider controls.
+- Re-assess scope when architecture or data flows change.
+
+Operational mapping:
+- ML training environment enters PCI scope when processing account data.

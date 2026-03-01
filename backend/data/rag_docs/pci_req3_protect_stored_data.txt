@@ -1,0 +1,9 @@
+﻿PCI DSS v4.0 Requirement 3: Protect Stored Account Data
+
+Requirement focus:
+- Render PAN unreadable using strong cryptography, tokenization, truncation, or equivalent.
+- Restrict sensitive authentication data storage.
+- Protect keys and key-management processes.
+
+Operational mapping:
+- Raw PAN in model training or exports is a critical violation.

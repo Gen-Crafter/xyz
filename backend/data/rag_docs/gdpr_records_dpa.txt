@@ -1,0 +1,18 @@
+﻿GDPR Records, Processor Agreements, and Incident Duties
+
+Article 28 Processor Controls:
+- Controller-processor relationship requires binding data processing terms.
+- Processor must follow documented instructions and safeguards.
+
+Article 30 Records of Processing Activities (ROPA):
+- Maintain records of processing purpose, categories, and transfers.
+
+Article 33 Breach Notification:
+- Notify supervisory authority within required timelines for personal data breach.
+
+Article 35 DPIA:
+- Conduct DPIA for high-risk processing and significant scope changes.
+
+Operational mapping:
+- External AI tool use requires DPA review.
+- Model drift and new personal-data fields should trigger DPIA checks.

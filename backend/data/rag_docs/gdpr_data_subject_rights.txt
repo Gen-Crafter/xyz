@@ -1,0 +1,20 @@
+﻿GDPR Data Subject Rights (Curated Operational Notes)
+
+Article 17 Right to Erasure:
+- Data subjects may request deletion when legal conditions apply.
+- Erasure can be limited by legal obligations or public-interest exceptions.
+- Controllers must document reason when refusing deletion.
+
+Article 18 Restriction of Processing:
+- Processing may be restricted while disputes are assessed.
+- Restricted records must be clearly marked and controlled.
+
+Article 20 Data Portability:
+- Data subjects can request portable data in structured formats.
+
+Article 22 Automated Decision-Making:
+- Significant automated decisions require safeguards and rights to contest.
+- Additional transparency and human review controls are recommended.
+
+Operational mapping:
+- For conflict cases, map deletion request to retention obligations and record decision rationale.

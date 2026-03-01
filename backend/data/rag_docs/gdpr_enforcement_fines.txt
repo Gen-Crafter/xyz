@@ -1,0 +1,8 @@
+﻿GDPR Enforcement Impact References (Curated Notes)
+
+Observed enforcement pattern:
+- Large fines often involve unlawful processing, inadequate legal basis, or unlawful transfers.
+- Cross-border governance failures attract significant regulatory attention.
+
+Operational lesson:
+- Build evidence for lawful basis, transfer mechanism, and processor contracts before processing.

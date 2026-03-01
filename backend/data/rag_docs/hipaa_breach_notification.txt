@@ -1,0 +1,9 @@
+﻿HIPAA Breach Notification Rule (Sections 164.400-414)
+
+Core requirements:
+- Determine if incident meets breach definition.
+- Perform risk assessment for unauthorized acquisition, access, use, or disclosure.
+- Notify required parties within applicable timeline windows.
+
+Operational mapping:
+- Incident workflows should generate breach-assessment summary and evidence package.

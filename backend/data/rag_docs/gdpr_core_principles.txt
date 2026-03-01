@@ -1,0 +1,22 @@
+﻿GDPR Core Principles and Lawful Basis (Curated Operational Notes)
+
+Article 5 Principles:
+- Process data lawfully, fairly, and transparently.
+- Collect data for explicit and legitimate purposes only.
+- Minimize data to what is necessary for the task.
+- Keep data accurate and up to date.
+- Apply storage limitation and defined retention windows.
+- Preserve integrity and confidentiality using technical safeguards.
+- Maintain accountability evidence for each processing activity.
+
+Article 6 Lawful Basis:
+- Consent for specific, informed, and revocable processing.
+- Contract necessity when processing is needed to perform a contract.
+- Legal obligation where law requires processing or retention.
+- Vital interests for urgent life-or-death situations.
+- Public task when authorized by law.
+- Legitimate interests balanced against rights and freedoms.
+
+Operational mapping:
+- If no lawful basis exists, processing must be blocked.
+- If lawful basis changes, re-registration and policy review are required.

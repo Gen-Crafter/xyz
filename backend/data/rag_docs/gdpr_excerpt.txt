@@ -1,0 +1,6 @@
+Article 5 GDPR states that personal data processing must be lawful, fair, transparent, purpose-limited, data-minimized, accurate, and protected with integrity and confidentiality.
+Article 6 GDPR provides lawful bases for processing, including consent, contract, legal obligation, vital interests, public task, and legitimate interests.
+Article 17 GDPR grants right to erasure where personal data is no longer necessary or consent is withdrawn, except where retention is required by legal obligation.
+Article 25 GDPR establishes privacy by design and by default for systems handling personal data.
+Article 30 GDPR requires records of processing activities and controllers must maintain demonstrable accountability.
+Articles 44 through 49 GDPR restrict international transfers and require safeguards such as SCCs or adequacy decisions.

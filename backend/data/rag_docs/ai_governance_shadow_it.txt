@@ -1,0 +1,13 @@
+﻿AI Governance: Shadow IT Controls for External LLM Usage
+
+Risk pattern:
+- Business teams send employee or customer data to unapproved external AI endpoints.
+
+Required controls:
+- Route all AI calls through approved enterprise gateway.
+- Enforce DPA validation for external processors.
+- Require lawful basis and transfer mechanism for EU personal data.
+- Block unknown endpoints and create near-miss audit trace.
+
+Citations:
+- GDPR Art.6, Art.28, Art.44, Art.33.

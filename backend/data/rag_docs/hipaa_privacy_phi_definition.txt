@@ -1,0 +1,12 @@
+﻿HIPAA Privacy Rule: PHI Definition and Minimum Necessary Standard
+
+Protected Health Information (PHI):
+- Individually identifiable health information in any form or medium.
+- Includes direct and indirect identifiers tied to health context.
+
+Minimum Necessary:
+- Access and disclosure should be limited to minimum data needed.
+- Workforce access must align with role and purpose.
+
+Operational mapping:
+- Analytics and vendor workflows must strip or mask identifiers when full PHI is not required.

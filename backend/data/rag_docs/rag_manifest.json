@@ -1,0 +1,434 @@
+﻿{
+    "conflict_hipaa_pci.txt":  {
+                                   "severity":  "high",
+                                   "doc_id":  "conflict_hipaa_pci",
+                                   "scenario_tags":  [
+                                                         "rogue_vendor_access",
+                                                         "raw_pan_training"
+                                                     ],
+                                   "article":  "164.312,Req10",
+                                   "title":  "Conflict map HIPAA PCI",
+                                   "section":  "HIPAA vs PCI conflict map",
+                                   "doc_type":  "conflict_map",
+                                   "regulation":  "CUSTOM"
+                               },
+    "gdpr_core_principles.txt":  {
+                                     "severity":  "high",
+                                     "doc_id":  "gdpr_core_principles",
+                                     "scenario_tags":  [
+                                                           "raw_pan_training",
+                                                           "model_drift",
+                                                           "shadow_it"
+                                                       ],
+                                     "article":  "Art.5,Art.6",
+                                     "title":  "GDPR core principles",
+                                     "section":  "Principles and lawful basis",
+                                     "doc_type":  "primary_law",
+                                     "regulation":  "GDPR"
+                                 },
+    "nist_ai_rmf_map.txt":  {
+                                "severity":  "medium",
+                                "doc_id":  "nist_ai_rmf_map",
+                                "scenario_tags":  [
+                                                      "model_drift"
+                                                  ],
+                                "article":  "MAP",
+                                "title":  "NIST AI RMF MAP",
+                                "section":  "Map function",
+                                "doc_type":  "technical_rule",
+                                "regulation":  "NIST-AI-RMF"
+                            },
+    "pci_req3_protect_stored_data.txt":  {
+                                             "severity":  "critical",
+                                             "doc_id":  "pci_req3_protect_stored_data",
+                                             "scenario_tags":  [
+                                                                   "raw_pan_training"
+                                                               ],
+                                             "article":  "Req3.3,Req3.4,Req3.5",
+                                             "title":  "PCI Req 3",
+                                             "section":  "Protect stored account data",
+                                             "doc_type":  "technical_rule",
+                                             "regulation":  "PCI-DSS"
+                                         },
+    "realtime_incidents_2025_excerpt.txt":  {
+                                                "severity":  "high",
+                                                "doc_id":  "realtime_incidents_2025_excerpt",
+                                                "scenario_tags":  [
+                                                                      "misconfigured_analytics",
+                                                                      "rogue_vendor_access",
+                                                                      "raw_pan_training",
+                                                                      "unencrypted_phi_transit",
+                                                                      "model_drift",
+                                                                      "shadow_it"
+                                                                  ],
+                                                "article":  "N/A",
+                                                "title":  "Realtime incidents 2025 excerpt",
+                                                "section":  "Incident grounding",
+                                                "doc_type":  "incident_ref",
+                                                "regulation":  "CUSTOM"
+                                            },
+    "gdpr_data_subject_rights.txt":  {
+                                         "severity":  "high",
+                                         "doc_id":  "gdpr_data_subject_rights",
+                                         "scenario_tags":  [
+                                                               "misconfigured_analytics",
+                                                               "model_drift"
+                                                           ],
+                                         "article":  "Art.17,Art.22",
+                                         "title":  "GDPR rights",
+                                         "section":  "Data subject rights and automated decisions",
+                                         "doc_type":  "primary_law",
+                                         "regulation":  "GDPR"
+                                     },
+    "gdpr_privacy_by_design.txt":  {
+                                       "severity":  "medium",
+                                       "doc_id":  "gdpr_privacy_by_design",
+                                       "scenario_tags":  [
+                                                             "model_drift"
+                                                         ],
+                                       "article":  "Art.25",
+                                       "title":  "GDPR privacy by design",
+                                       "section":  "Privacy by design and default",
+                                       "doc_type":  "primary_law",
+                                       "regulation":  "GDPR"
+                                   },
+    "pci_req4_encrypt_transmission.txt":  {
+                                              "severity":  "high",
+                                              "doc_id":  "pci_req4_encrypt_transmission",
+                                              "scenario_tags":  [
+                                                                    "raw_pan_training"
+                                                                ],
+                                              "article":  "Req4.2",
+                                              "title":  "PCI Req 4",
+                                              "section":  "Encrypt transmission",
+                                              "doc_type":  "technical_rule",
+                                              "regulation":  "PCI-DSS"
+                                          },
+    "hipaa_breach_notification.txt":  {
+                                          "severity":  "high",
+                                          "doc_id":  "hipaa_breach_notification",
+                                          "scenario_tags":  [
+                                                                "misconfigured_analytics",
+                                                                "unencrypted_phi_transit"
+                                                            ],
+                                          "article":  "164.400-414",
+                                          "title":  "HIPAA breach notification",
+                                          "section":  "Breach notification",
+                                          "doc_type":  "primary_law",
+                                          "regulation":  "HIPAA"
+                                      },
+    "gdpr_records_dpa.txt":  {
+                                 "severity":  "high",
+                                 "doc_id":  "gdpr_records_dpa",
+                                 "scenario_tags":  [
+                                                       "misconfigured_analytics",
+                                                       "shadow_it",
+                                                       "model_drift"
+                                                   ],
+                                 "article":  "Art.28,Art.30,Art.33,Art.35",
+                                 "title":  "GDPR records and DPA",
+                                 "section":  "DPA, records, breach, DPIA",
+                                 "doc_type":  "primary_law",
+                                 "regulation":  "GDPR"
+                             },
+    "compensating_controls_library.txt":  {
+                                              "severity":  "critical",
+                                              "doc_id":  "compensating_controls_library",
+                                              "scenario_tags":  [
+                                                                    "misconfigured_analytics",
+                                                                    "rogue_vendor_access",
+                                                                    "raw_pan_training",
+                                                                    "unencrypted_phi_transit",
+                                                                    "model_drift",
+                                                                    "shadow_it"
+                                                                ],
+                                              "article":  "N/A",
+                                              "title":  "Compensating controls library",
+                                              "section":  "Compensating control catalog",
+                                              "doc_type":  "compensating_control",
+                                              "regulation":  "CUSTOM"
+                                          },
+    "hipaa_security_transmission.txt":  {
+                                            "severity":  "critical",
+                                            "doc_id":  "hipaa_security_transmission",
+                                            "scenario_tags":  [
+                                                                  "unencrypted_phi_transit"
+                                                              ],
+                                            "article":  "164.312(e)",
+                                            "title":  "HIPAA transmission security",
+                                            "section":  "Transmission security",
+                                            "doc_type":  "technical_rule",
+                                            "regulation":  "HIPAA"
+                                        },
+    "hipaa_privacy_phi_definition.txt":  {
+                                             "severity":  "high",
+                                             "doc_id":  "hipaa_privacy_phi_definition",
+                                             "scenario_tags":  [
+                                                                   "misconfigured_analytics",
+                                                                   "rogue_vendor_access"
+                                                               ],
+                                             "article":  "164.502,164.514",
+                                             "title":  "HIPAA PHI definition",
+                                             "section":  "PHI and minimum necessary",
+                                             "doc_type":  "primary_law",
+                                             "regulation":  "HIPAA"
+                                         },
+    "realtime_operations_runbook.txt":  {
+                                            "severity":  "high",
+                                            "doc_id":  "realtime_operations_runbook",
+                                            "scenario_tags":  [
+                                                                  "misconfigured_analytics",
+                                                                  "rogue_vendor_access",
+                                                                  "raw_pan_training",
+                                                                  "unencrypted_phi_transit",
+                                                                  "model_drift",
+                                                                  "shadow_it"
+                                                              ],
+                                            "article":  "N/A",
+                                            "title":  "Realtime operations runbook",
+                                            "section":  "Operational runbook",
+                                            "doc_type":  "conflict_map",
+                                            "regulation":  "CUSTOM"
+                                        },
+    "gdpr_data_transfers.txt":  {
+                                    "severity":  "critical",
+                                    "doc_id":  "gdpr_data_transfers",
+                                    "scenario_tags":  [
+                                                          "misconfigured_analytics",
+                                                          "shadow_it",
+                                                          "raw_pan_training"
+                                                      ],
+                                    "article":  "Art.44-49",
+                                    "title":  "GDPR data transfers",
+                                    "section":  "Cross-border transfers",
+                                    "doc_type":  "primary_law",
+                                    "regulation":  "GDPR"
+                                },
+    "hipaa_privacy_baa.txt":  {
+                                  "severity":  "critical",
+                                  "doc_id":  "hipaa_privacy_baa",
+                                  "scenario_tags":  [
+                                                        "misconfigured_analytics",
+                                                        "rogue_vendor_access"
+                                                    ],
+                                  "article":  "164.308(b)(1),164.502(e)",
+                                  "title":  "HIPAA BAA",
+                                  "section":  "BAA requirements",
+                                  "doc_type":  "primary_law",
+                                  "regulation":  "HIPAA"
+                              },
+    "hipaa_security_risk_analysis.txt":  {
+                                             "severity":  "high",
+                                             "doc_id":  "hipaa_security_risk_analysis",
+                                             "scenario_tags":  [
+                                                                   "unencrypted_phi_transit"
+                                                               ],
+                                             "article":  "164.308(a)(1)",
+                                             "title":  "HIPAA risk analysis",
+                                             "section":  "Risk analysis",
+                                             "doc_type":  "technical_rule",
+                                             "regulation":  "HIPAA"
+                                         },
+    "hipaa_violation_cases.txt":  {
+                                      "severity":  "high",
+                                      "doc_id":  "hipaa_violation_cases",
+                                      "scenario_tags":  [
+                                                            "misconfigured_analytics",
+                                                            "rogue_vendor_access",
+                                                            "unencrypted_phi_transit"
+                                                        ],
+                                      "article":  "case_refs",
+                                      "title":  "HIPAA incident references",
+                                      "section":  "Healthcare incident references",
+                                      "doc_type":  "incident_ref",
+                                      "regulation":  "CUSTOM"
+                                  },
+    "pci_breach_costs.txt":  {
+                                 "severity":  "high",
+                                 "doc_id":  "pci_breach_costs",
+                                 "scenario_tags":  [
+                                                       "raw_pan_training"
+                                                   ],
+                                 "article":  "case_refs",
+                                 "title":  "PCI breach costs",
+                                 "section":  "PCI incident cost references",
+                                 "doc_type":  "incident_ref",
+                                 "regulation":  "CUSTOM"
+                             },
+    "gdpr_enforcement_fines.txt":  {
+                                       "severity":  "high",
+                                       "doc_id":  "gdpr_enforcement_fines",
+                                       "scenario_tags":  [
+                                                             "shadow_it",
+                                                             "model_drift",
+                                                             "misconfigured_analytics"
+                                                         ],
+                                       "article":  "case_refs",
+                                       "title":  "GDPR enforcement references",
+                                       "section":  "GDPR enforcement references",
+                                       "doc_type":  "incident_ref",
+                                       "regulation":  "CUSTOM"
+                                   },
+    "nist_ai_rmf_measure.txt":  {
+                                    "severity":  "high",
+                                    "doc_id":  "nist_ai_rmf_measure",
+                                    "scenario_tags":  [
+                                                          "model_drift"
+                                                      ],
+                                    "article":  "MEASURE",
+                                    "title":  "NIST AI RMF MEASURE",
+                                    "section":  "Measure function",
+                                    "doc_type":  "technical_rule",
+                                    "regulation":  "NIST-AI-RMF"
+                                },
+    "pci_req7_access_control.txt":  {
+                                        "severity":  "medium",
+                                        "doc_id":  "pci_req7_access_control",
+                                        "scenario_tags":  [
+                                                              "raw_pan_training",
+                                                              "rogue_vendor_access"
+                                                          ],
+                                        "article":  "Req7.2",
+                                        "title":  "PCI Req 7",
+                                        "section":  "Access control",
+                                        "doc_type":  "technical_rule",
+                                        "regulation":  "PCI-DSS"
+                                    },
+    "hipaa_security_audit_controls.txt":  {
+                                              "severity":  "medium",
+                                              "doc_id":  "hipaa_security_audit_controls",
+                                              "scenario_tags":  [
+                                                                    "rogue_vendor_access",
+                                                                    "unencrypted_phi_transit"
+                                                                ],
+                                              "article":  "164.312(b)",
+                                              "title":  "HIPAA audit controls",
+                                              "section":  "Audit controls",
+                                              "doc_type":  "technical_rule",
+                                              "regulation":  "HIPAA"
+                                          },
+    "conflict_gdpr_pci.txt":  {
+                                  "severity":  "critical",
+                                  "doc_id":  "conflict_gdpr_pci",
+                                  "scenario_tags":  [
+                                                        "raw_pan_training",
+                                                        "shadow_it"
+                                                    ],
+                                  "article":  "Art.44,Req3",
+                                  "title":  "Conflict map GDPR PCI",
+                                  "section":  "GDPR vs PCI conflict map",
+                                  "doc_type":  "conflict_map",
+                                  "regulation":  "CUSTOM"
+                              },
+    "nist_ai_rmf_manage.txt":  {
+                                   "severity":  "high",
+                                   "doc_id":  "nist_ai_rmf_manage",
+                                   "scenario_tags":  [
+                                                         "model_drift"
+                                                     ],
+                                   "article":  "MANAGE",
+                                   "title":  "NIST AI RMF MANAGE",
+                                   "section":  "Manage function",
+                                   "doc_type":  "technical_rule",
+                                   "regulation":  "NIST-AI-RMF"
+                               },
+    "ai_governance_shadow_it.txt":  {
+                                        "severity":  "critical",
+                                        "doc_id":  "ai_governance_shadow_it",
+                                        "scenario_tags":  [
+                                                              "shadow_it"
+                                                          ],
+                                        "article":  "Art.6,Art.28,Art.44",
+                                        "title":  "Shadow IT AI governance",
+                                        "section":  "Shadow IT governance",
+                                        "doc_type":  "conflict_map",
+                                        "regulation":  "CUSTOM"
+                                    },
+    "hipaa_security_access_control.txt":  {
+                                              "severity":  "high",
+                                              "doc_id":  "hipaa_security_access_control",
+                                              "scenario_tags":  [
+                                                                    "rogue_vendor_access",
+                                                                    "unencrypted_phi_transit"
+                                                                ],
+                                              "article":  "164.312(a)",
+                                              "title":  "HIPAA access control",
+                                              "section":  "Access controls",
+                                              "doc_type":  "technical_rule",
+                                              "regulation":  "HIPAA"
+                                          },
+    "model_drift_governance.txt":  {
+                                       "severity":  "critical",
+                                       "doc_id":  "model_drift_governance",
+                                       "scenario_tags":  [
+                                                             "model_drift"
+                                                         ],
+                                       "article":  "Art.5,Art.22,Art.35",
+                                       "title":  "Model drift governance",
+                                       "section":  "Model drift governance",
+                                       "doc_type":  "conflict_map",
+                                       "regulation":  "CUSTOM"
+                                   },
+    "conflict_gdpr_hipaa.txt":  {
+                                    "severity":  "critical",
+                                    "doc_id":  "conflict_gdpr_hipaa",
+                                    "scenario_tags":  [
+                                                          "misconfigured_analytics",
+                                                          "rogue_vendor_access"
+                                                      ],
+                                    "article":  "Art.17,164.502",
+                                    "title":  "Conflict map GDPR HIPAA",
+                                    "section":  "GDPR vs HIPAA conflict map",
+                                    "doc_type":  "conflict_map",
+                                    "regulation":  "CUSTOM"
+                                },
+    "pci_req12_scope_risk.txt":  {
+                                     "severity":  "high",
+                                     "doc_id":  "pci_req12_scope_risk",
+                                     "scenario_tags":  [
+                                                           "raw_pan_training"
+                                                       ],
+                                     "article":  "Req12.5,Req12.8",
+                                     "title":  "PCI Req 12",
+                                     "section":  "Scope and risk",
+                                     "doc_type":  "technical_rule",
+                                     "regulation":  "PCI-DSS"
+                                 },
+    "hipaa_privacy_disclosures.txt":  {
+                                          "severity":  "high",
+                                          "doc_id":  "hipaa_privacy_disclosures",
+                                          "scenario_tags":  [
+                                                                "misconfigured_analytics",
+                                                                "rogue_vendor_access"
+                                                            ],
+                                          "article":  "164.502,164.508",
+                                          "title":  "HIPAA disclosures",
+                                          "section":  "Permitted disclosures",
+                                          "doc_type":  "primary_law",
+                                          "regulation":  "HIPAA"
+                                      },
+    "nist_ai_rmf_govern.txt":  {
+                                   "severity":  "high",
+                                   "doc_id":  "nist_ai_rmf_govern",
+                                   "scenario_tags":  [
+                                                         "model_drift"
+                                                     ],
+                                   "article":  "GOVERN",
+                                   "title":  "NIST AI RMF GOVERN",
+                                   "section":  "Govern function",
+                                   "doc_type":  "technical_rule",
+                                   "regulation":  "NIST-AI-RMF"
+                               },
+    "pci_req10_audit_logging.txt":  {
+                                        "severity":  "medium",
+                                        "doc_id":  "pci_req10_audit_logging",
+                                        "scenario_tags":  [
+                                                              "raw_pan_training"
+                                                          ],
+                                        "article":  "Req10.2,Req10.7",
+                                        "title":  "PCI Req 10",
+                                        "section":  "Audit logging",
+                                        "doc_type":  "technical_rule",
+                                        "regulation":  "PCI-DSS"
+                                    }
+}

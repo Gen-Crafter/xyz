@@ -1,0 +1,8 @@
+﻿PCI DSS v4.0 Requirement 4: Protect Card Data in Transit
+
+Requirement focus:
+- Use strong cryptography for cardholder data transmissions over open or public networks.
+- Disallow insecure protocols and weak cipher configurations.
+
+Operational mapping:
+- Export or integration pathways carrying PAN must enforce approved transport controls.

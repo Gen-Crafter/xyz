@@ -1,0 +1,9 @@
+﻿NIST AI RMF 1.0: GOVERN Function Notes
+
+GOVERN guidance emphasizes:
+- Defined accountability and risk ownership for AI systems.
+- Policy-backed controls and incident governance workflows.
+- Lifecycle monitoring and escalation practices.
+
+Operational mapping:
+- Model drift events require owner assignment and governance traceability.

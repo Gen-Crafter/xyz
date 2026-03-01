@@ -1,0 +1,48 @@
+ADCL Real-Time Operations Runbook (Synthetic Internal Guidance)
+
+Purpose:
+This runbook defines realistic live-event patterns for enterprise AI governance operations.
+Use it as contextual guidance when generating controls, implementation steps, and audit-ready
+remediation actions.
+
+1) Event Classes Seen in Production
+- Inference request events: high volume, low latency, frequent metadata updates.
+- Training job events: lower frequency, high impact, broad dataset joins.
+- Export pipeline events: medium frequency, highest cross-border and compliance risk.
+- Delete and retention events: low frequency, legally sensitive, strict evidence requirements.
+- Archive and backup events: periodic, retention-heavy, often multi-jurisdictional.
+
+2) Typical Risk Spikes
+- Sudden cross-border flow from EU source to non-EU destination.
+- Cardholder fields present in export or training without clear masking controls.
+- PHI delete requests where legal retention windows are still active.
+- Missing audit trail fields in transformation or transfer events.
+- Repeated failed control checks across the same workload in a short window.
+
+3) Recommended Real-Time Compensating Controls
+- Route high-risk exports through a pre-transfer control gate with policy checks.
+- Enforce encryption and key-management controls before movement of sensitive fields.
+- Apply pseudonymization or tokenization before non-clinical or third-party processing.
+- Require documented lawful basis and transfer mechanism for EU data movement.
+- Record explicit owner, approval time, and evidence artifact for every mitigation action.
+
+4) Evidence Requirements for Audit Closure
+- Conflict ID, workload ID, and rule decision trace.
+- Retrieved policy citations and grounded source references.
+- Implemented control steps with timestamps and responsible owner.
+- Post-mitigation risk score and unresolved residual risk statement.
+- Final reviewer decision (approve or reject) with rationale.
+
+5) Scenario Patterns for Simulation
+- Hospital scenario: delete PHI with GDPR and HIPAA overlap, then controlled mitigation.
+- Banking scenario: export cardholder records, enforce PCI controls and transfer safeguards.
+- Cross-border analytics scenario: EU-origin PII export with transfer restrictions and SCC checks.
+- Mixed background traffic: non-conflict infer/train/archive events with occasional audit gaps.
+
+6) Incident-Grounded Daily Scenario Pack
+- misconfigured_analytics: external analytics receives PHI/PII without BAA and transfer safeguards.
+- rogue_vendor_access: vendor access path opens before BAA execution and access scoping.
+- raw_pan_training: production PAN fields enter model training before tokenization.
+- unencrypted_phi_transit: ePHI path observed without TLS or at-rest encryption controls.
+- model_drift_scope_break: model starts consuming out-of-scope personal data fields.
+- shadow_it_llm_export: employee PII attempted transfer to unapproved external LLM endpoint.

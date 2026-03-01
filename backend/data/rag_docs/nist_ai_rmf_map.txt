@@ -1,0 +1,9 @@
+﻿NIST AI RMF 1.0: MAP Function Notes
+
+MAP guidance emphasizes:
+- Documenting context, intended use, and system boundaries.
+- Identifying impacted populations and data dependencies.
+- Mapping risk sources including data quality and scope drift.
+
+Operational mapping:
+- New incoming personal-data fields should trigger context re-mapping.

@@ -1,0 +1,10 @@
+﻿HIPAA Security Rule: Access Controls (Section 164.312(a))
+
+Control expectations:
+- Unique user identification for accountability.
+- Emergency access procedures with governance controls.
+- Automatic logoff where appropriate.
+- Encryption and decryption safeguards for ePHI systems.
+
+Operational mapping:
+- Vendor and analyst access should enforce least privilege and strong identity controls.

@@ -1,0 +1,8 @@
+﻿PCI DSS v4.0 Requirement 7: Restrict Access by Need-to-Know
+
+Requirement focus:
+- Enforce role-based access and least privilege.
+- Review and approve access rights regularly.
+
+Operational mapping:
+- Vendor and analyst access to card data requires explicit scope and approval evidence.

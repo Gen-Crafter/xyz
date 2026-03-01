@@ -1,0 +1,5 @@
+HIPAA Privacy Rule requires covered entities to protect individually identifiable health information and limit use and disclosure to the minimum necessary purpose.
+HIPAA administrative requirements include workforce training, safeguards, and designated privacy responsibilities.
+HIPAA documentation retention requires relevant policies and procedures to be retained for six years from creation or effective date.
+HIPAA Security Rule requires administrative, physical, and technical safeguards for confidentiality, integrity, and availability of ePHI.
+NIST SP 800-66r2 guidance maps HIPAA safeguards to risk management practices and emphasizes continuous assessment and auditability.

@@ -1,0 +1,8 @@
+﻿HIPAA Security Rule: Audit Controls (Section 164.312(b))
+
+Control expectations:
+- Implement mechanisms to record and examine system activity involving ePHI.
+- Preserve integrity of audit trail and support forensic review.
+
+Operational mapping:
+- Lineage and event logs must be retained and reviewable for compliance investigations.
