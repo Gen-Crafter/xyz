@@ -23,14 +23,15 @@ logger = logging.getLogger(__name__)
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    logger.info("Starting AI Governance Proxy API...")
+    logger.info("Starting GenCrafter API...")
 
-    # Initialize database
+    # Initialize database — retries up to 10 times waiting for PostgreSQL
     try:
         await init_db()
-        logger.info("Database initialized")
+        logger.info("Database initialized — all tables created/verified")
     except Exception as e:
-        logger.warning("Database init failed (may not be available): %s", e)
+        logger.error("Database init failed after retries: %s", e)
+        logger.error("Tables may not exist — check PostgreSQL connectivity")
 
     # Initialize LLM service (local Ollama — no auth required)
     llm_service = None
@@ -72,6 +73,96 @@ async def lifespan(app: FastAPI):
     except Exception as e:
         logger.warning("Seed failed (DB may not be available): %s", e)
 
+    # Seed default admin user
+    try:
+        from sqlalchemy import select
+        from passlib.context import CryptContext
+        from app.models.db_models import TenantModel, UserModel
+        # Support long passwords by using bcrypt_sha256 (falls back to bcrypt for old hashes)
+        _pwd = CryptContext(schemes=["bcrypt_sha256", "bcrypt"], deprecated="auto")
+        async with async_session() as db:
+            # Ensure default tenant exists
+            result = await db.execute(select(TenantModel).where(TenantModel.name == "Default"))
+            tenant = result.scalars().first()
+            if not tenant:
+                tenant = TenantModel(name="Default")
+                db.add(tenant)
+                await db.flush()
+                await db.refresh(tenant)
+            # Ensure default admin user exists
+            result = await db.execute(
+                select(UserModel).where(UserModel.email == "parmeshwr.prasad@gmail.com")
+            )
+            admin_user = result.scalars().first()
+            if not admin_user:
+                admin_user = UserModel(
+                    email="parmeshwr.prasad@gmail.com",
+                    full_name="Parmeshwr Prasad",
+                    hashed_password=_pwd.hash("admin"),
+                    is_admin=True,
+                    is_active=True,
+                    tenant_id=tenant.id,
+                )
+                db.add(admin_user)
+                await db.flush()
+                logger.info("Default admin user created: parmeshwr.prasad@gmail.com")
+            else:
+                # Ensure existing user always has admin privileges
+                if not admin_user.is_admin:
+                    admin_user.is_admin = True
+                    await db.flush()
+                    logger.info("Default admin user promoted to admin")
+            await db.commit()
+    except Exception as e:
+        logger.warning("Default admin seed failed: %s", e)
+
+    # Seed default compliance categories (AI, DPDP) and ensure they are active
+    try:
+        from sqlalchemy import select
+        from app.models.db_models import CategoryModel
+
+        default_categories = [
+            {"name": "AI Governance", "slug": "ai", "icon": "psychology", "description": "AI compliance, policies, endpoints"},
+            {"name": "DPDP Compliance", "slug": "dpdp", "icon": "shield", "description": "Consent, rights, breaches, vendors"},
+        ]
+
+        async with async_session() as db:
+            # Get default tenant
+            result = await db.execute(select(TenantModel).where(TenantModel.name == "Default"))
+            tenant = result.scalars().first()
+            if not tenant:
+                logger.warning("Default tenant missing during category seed; skipping")
+            else:
+                for cat in default_categories:
+                    existing = await db.execute(
+                        select(CategoryModel).where(
+                            CategoryModel.tenant_id == tenant.id,
+                            CategoryModel.slug == cat["slug"],
+                        )
+                    )
+                    row = existing.scalars().first()
+                    if row:
+                        # Ensure active and update metadata
+                        row.name = cat["name"]
+                        row.icon = cat["icon"]
+                        row.description = cat["description"]
+                        row.is_active = True
+                    else:
+                        db.add(CategoryModel(
+                            tenant_id=tenant.id,
+                            name=cat["name"],
+                            slug=cat["slug"],
+                            icon=cat["icon"],
+                            description=cat["description"],
+                            is_active=True,
+                            created_by=admin_user.id if 'admin_user' in locals() else None,
+                        ))
+                await db.flush()
+                await db.commit()
+                logger.info("Default compliance categories ensured (AI, DPDP)")
+    except Exception as e:
+        logger.warning("Default category seed failed: %s", e)
+
     # Auto-ingest RAG documents
     try:
         result = await rag_service.ingest_regulation_texts()
@@ -83,13 +174,13 @@ async def lifespan(app: FastAPI):
     mcp_set_app_state(app.state)
     logger.info("MCP server initialized — tools available at /mcp")
 
-    logger.info("AI Governance Proxy API ready")
+    logger.info("GenCrafter API ready")
     yield
-    logger.info("Shutting down AI Governance Proxy API")
+    logger.info("Shutting down GenCrafter API")
 
 
 app = FastAPI(
-    title="AI Governance Server API",
+    title="GenCrafter API",
     description="Context-Aware Compliance Interception Layer for AI Agent Traffic",
     version="1.0.0",
     lifespan=lifespan,
@@ -160,7 +251,7 @@ async def health():
 @app.get("/")
 async def root():
     return {
-        "service": "AI Governance Server",
+        "service": "GenCrafter",
         "version": "1.0.0",
         "llm": f"Ollama ({settings.ollama_model})",
         "docs": "/docs",

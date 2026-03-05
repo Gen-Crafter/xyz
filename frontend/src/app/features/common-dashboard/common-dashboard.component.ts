@@ -119,8 +119,39 @@ const CATEGORY_TEMPLATES: CategoryTemplate[] = [
         </div>
       }
 
+      @if (userService.isAdmin() && inactiveCategories().length > 0) {
+        <div class="active-section">
+          <h3><mat-icon>apps</mat-icon> Inactive Modules</h3>
+          <div class="category-grid">
+            @for (cat of inactiveCategories(); track cat.slug) {
+              <mat-card class="category-card" matTooltip="Enable this module to make it available" matTooltipPosition="above">
+                <div class="cat-header">
+                  <div class="cat-icon" [style.background]="getColor(cat.slug) + '18'" [style.color]="getColor(cat.slug)">
+                    <mat-icon>{{ cat.icon }}</mat-icon>
+                  </div>
+                  <mat-slide-toggle
+                    [checked]="cat.is_active"
+                    (change)="toggleCategory(cat, $event.checked)"
+                    (click)="$event.stopPropagation()"
+                    color="primary"
+                    matTooltip="Toggle this module on or off for your organization">
+                  </mat-slide-toggle>
+                </div>
+                <h2>{{ cat.name }}</h2>
+                <p class="cat-desc">{{ cat.description }}</p>
+                <div class="cat-footer">
+                  <span class="cat-status">
+                    <span class="dot"></span> Inactive
+                  </span>
+                </div>
+              </mat-card>
+            }
+          </div>
+        </div>
+      }
+
       <!-- Empty state -->
-      @if (activeCategories().length === 0 && availableToCreate().length === 0) {
+      @if (activeCategories().length === 0 && inactiveCategories().length === 0 && availableToCreate().length === 0) {
         <mat-card class="empty-card">
           <mat-icon class="empty-icon">category</mat-icon>
           <h2>No modules configured</h2>
@@ -214,6 +245,10 @@ export class CommonDashboardComponent implements OnInit {
     this.categories().filter(c => c.is_active)
   );
 
+  inactiveCategories = computed(() =>
+    this.categories().filter(c => !c.is_active)
+  );
+
   availableToCreate = computed(() => {
     const existingSlugs = new Set(this.categories().map(c => c.slug));
     return CATEGORY_TEMPLATES.filter(t => !existingSlugs.has(t.slug));
@@ -233,7 +268,12 @@ export class CommonDashboardComponent implements OnInit {
       description: tpl.description,
     }).subscribe({
       next: () => this.catService.load().subscribe(),
-      error: () => {},
+      error: (err) => {
+        // If the category already exists (HTTP 409), just reload instead of surfacing an error
+        if (err?.status === 409) {
+          this.catService.load().subscribe();
+        }
+      },
     });
   }
 

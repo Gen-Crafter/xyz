@@ -28,7 +28,7 @@ services:
       - HF_HUB_DISABLE_TELEMETRY=1
     depends_on:
       postgres:
-        condition: service_started
+        condition: service_healthy
       redis:
         condition: service_started
       chromadb:
@@ -111,6 +111,12 @@ services:
       - POSTGRES_DB=aigp_db
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U aigp -d aigp_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
     restart: unless-stopped
 
   # Redis

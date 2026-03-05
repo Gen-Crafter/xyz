@@ -23,9 +23,9 @@ import { CategoryService } from './core/services/category.service';
       <!-- ── Brand Top Bar ──────────────────────────────────────────────── -->
       <header class="top-bar">
         <div class="top-bar-left">
-          <span class="top-bar-mark">AI</span>
+          <img class="top-bar-logo" src="assets/gencrafter-logo.png" alt="GenCrafter" />
           <span class="top-bar-divider"></span>
-          <span class="top-bar-product">AI Governance Server</span>
+          <span class="top-bar-product">GenCrafter</span>
         </div>
         <div class="top-bar-right">
           <div class="notif-wrapper" (click)="showNotifPanel.set(!showNotifPanel())"
@@ -166,13 +166,7 @@ import { CategoryService } from './core/services/category.service';
     .top-bar-left {
       display: flex; align-items: center; gap: 0;
     }
-    .top-bar-mark {
-      height: 28px; min-width: 28px; padding: 0 10px; display: inline-flex;
-      align-items: center; justify-content: center;
-      background: rgba(255,255,255,0.12);
-      border: 1px solid rgba(255,255,255,0.2);
-      border-radius: 8px; font-weight: 800; font-size: 13px; letter-spacing: 0.4px;
-    }
+    .top-bar-logo { height: 28px; width: auto; display: block; }
     .top-bar-divider {
       width: 1px; height: 28px;
       background: rgba(255,255,255,0.15);
@@ -362,7 +356,7 @@ export class AppComponent implements OnInit {
 
   aiNavItems = [
     { path: '/ai-dashboard', icon: 'dashboard', label: 'AI Dashboard', tooltip: 'Overview of AI compliance KPIs, violations, and risk scores' },
-    { path: '/endpoints', icon: 'rocket_launch', label: 'AI Projects', tooltip: 'Register AI deployments and get MCP connection configs for compliance scanning' },
+    { path: '/mcp-registration', icon: 'hub', label: 'MCP Registration', tooltip: 'Register AI deployments and get MCP connection configs for compliance scanning' },
     { path: '/ai-frameworks', icon: 'account_tree', label: 'AI Frameworks', tooltip: 'Configure AI governance frameworks and standards' },
     { path: '/live-monitor', icon: 'monitor_heart', label: 'Live Monitor', tooltip: 'Real-time view of AI agent traffic and interceptions' },
     { path: '/policies', icon: 'policy', label: 'Policies', tooltip: 'Create and manage compliance rules that govern AI behavior' },

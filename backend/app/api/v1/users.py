@@ -15,7 +15,8 @@ from app.models.db_models import UserModel, TenantModel
 # ── Password hashing ──────────────────────────────────────────────────────
 from passlib.context import CryptContext
 
-pwd_ctx = CryptContext(schemes=["bcrypt"], deprecated="auto")
+# Support long passwords; bcrypt_sha256 pre-hashes input before bcrypt
+pwd_ctx = CryptContext(schemes=["bcrypt_sha256", "bcrypt"], deprecated="auto")
 
 # ── JWT ────────────────────────────────────────────────────────────────────
 from jose import jwt, JWTError
@@ -81,6 +82,32 @@ class UserResponse(BaseModel):
 
 # ── Helpers ────────────────────────────────────────────────────────────────
 
+DEFAULT_ADMIN_EMAIL = "parmeshwr.prasad@gmail.com"
+
+
+def _validate_password_complexity(email: str, password: str) -> None:
+    """Enforce password complexity rules for all users except the default admin."""
+    if email.lower() == DEFAULT_ADMIN_EMAIL.lower():
+        return
+    import re
+    errors = []
+    if len(password) < 10:
+        errors.append("at least 10 characters")
+    if not re.search(r'[A-Z]', password):
+        errors.append("at least one uppercase letter (A-Z)")
+    if not re.search(r'[a-z]', password):
+        errors.append("at least one lowercase letter (a-z)")
+    if not re.search(r'\d', password):
+        errors.append("at least one number (0-9)")
+    if not re.search(r'[!@#$%^&*()_+\-=\[\]{};:\'",.<>/?\\|`~]', password):
+        errors.append("at least one special character (e.g. !@#$%)")
+    if errors:
+        raise HTTPException(
+            status_code=400,
+            detail="Password must contain: " + "; ".join(errors),
+        )
+
+
 def _create_token(user: UserModel) -> str:
     payload = {
         "sub": str(user.id),
@@ -111,6 +138,8 @@ async def register(body: UserCreate, db: AsyncSession = Depends(get_db)):
     exists = await db.execute(select(UserModel).where(UserModel.email == body.email))
     if exists.scalars().first():
         raise HTTPException(status_code=409, detail="Email already registered")
+
+    _validate_password_complexity(body.email, body.password)
 
     tenant_id = uuid.UUID(body.tenant_id) if body.tenant_id else await _get_or_create_default_tenant(db)
 
@@ -197,6 +226,8 @@ async def change_password(
     if not pwd_ctx.verify(body.current_password, user.hashed_password):
         raise HTTPException(status_code=400, detail="Current password is incorrect")
 
+    _validate_password_complexity(user.email, body.new_password)
+
     user.hashed_password = pwd_ctx.hash(body.new_password)
     await db.flush()
     return {"message": "Password changed successfully"}
@@ -235,6 +266,8 @@ async def create_user(
     exists = await db.execute(select(UserModel).where(UserModel.email == body.email))
     if exists.scalars().first():
         raise HTTPException(status_code=409, detail="Email already registered")
+
+    _validate_password_complexity(body.email, body.password)
 
     tenant_id = admin.tenant_id
 

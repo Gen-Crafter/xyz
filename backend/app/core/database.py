@@ -25,5 +25,29 @@ async def get_db() -> AsyncSession:
 
 
 async def init_db():
-    async with engine.begin() as conn:
-        await conn.run_sync(Base.metadata.create_all)
+    import asyncio
+    import logging
+
+    # Import ALL models so Base.metadata knows about every table
+    import app.models.db_models  # noqa: F401
+
+    _logger = logging.getLogger("aigp.db")
+    max_retries = 10
+    retry_delay = 3  # seconds
+
+    for attempt in range(1, max_retries + 1):
+        try:
+            async with engine.begin() as conn:
+                await conn.run_sync(Base.metadata.create_all)
+            _logger.info("All database tables created/verified successfully")
+            return
+        except Exception as e:
+            if attempt < max_retries:
+                _logger.warning(
+                    "DB init attempt %d/%d failed: %s — retrying in %ds",
+                    attempt, max_retries, e, retry_delay,
+                )
+                await asyncio.sleep(retry_delay)
+            else:
+                _logger.error("DB init failed after %d attempts: %s", max_retries, e)
+                raise

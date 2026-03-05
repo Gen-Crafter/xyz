@@ -1,4 +1,4 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component, OnInit, computed, signal, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
@@ -6,6 +6,10 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
+import { ApiService } from '../../core/services/api.service';
 
 interface FrameworkGuide {
   id: string;
@@ -19,6 +23,14 @@ interface Project {
   name: string;
   owner: string;
   tags: string[];
+  deploymentId?: string;
+}
+
+interface McpDeploymentOption {
+  id: string;
+  name: string;
+  framework: string;
+  environment: string;
 }
 
 @Component({
@@ -32,6 +44,9 @@ interface Project {
     MatIconModule,
     MatButtonModule,
     MatDividerModule,
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule,
   ],
   template: `
     <div class="page">
@@ -68,6 +83,41 @@ interface Project {
             </button>
           </div>
         </div>
+
+        <mat-divider></mat-divider>
+
+        <div class="create-grid">
+          <div class="create-header">
+            <h3>Create new project</h3>
+            <p>Capture owner, tags, and link an MCP deployment for NIST AI RMF mapping.</p>
+          </div>
+          <div class="create-form">
+            <mat-form-field appearance="outline">
+              <mat-label>Project name</mat-label>
+              <input matInput [(ngModel)]="form.name" placeholder="GenAI Copilot" />
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Owner</mat-label>
+              <input matInput [(ngModel)]="form.owner" placeholder="Data Science" />
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Tags (comma-separated)</mat-label>
+              <input matInput [(ngModel)]="form.tags" placeholder="LLM, RAG, Prod" />
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>MCP Deployment</mat-label>
+              <mat-select [(ngModel)]="form.deploymentId" [disabled]="deployments().length === 0">
+                <mat-option *ngFor="let d of deployments()" [value]="d.id">
+                  {{ d.name }} — {{ d.framework }} ({{ d.environment }})
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <button mat-flat-button color="primary" (click)="addProject()" [disabled]="!form.name || !form.owner">
+            <mat-icon>add</mat-icon>
+            Add project
+          </button>
+        </div>
       </mat-card>
 
       <div class="grid">
@@ -83,7 +133,13 @@ interface Project {
           </ul>
           <div class="cta">
             <mat-icon>lightbulb</mat-icon>
-            <span>Use with {{ selectedProject()?.name || 'your project' }} to map risks and actions.</span>
+            <span>
+              Use with {{ selectedProject()?.name || 'your project' }}
+              <ng-container *ngIf="selectedProject()?.deploymentId">
+                (MCP: {{ displayDeployment(selectedProject()?.deploymentId) }})
+              </ng-container>
+              to map risks and actions.
+            </span>
           </div>
         </mat-card>
       </div>
@@ -103,6 +159,10 @@ interface Project {
     mat-select { width: 100%; }
     .selector-right { display: flex; align-items: center; gap: 12px; }
     .pill-row mat-chip { background: var(--brand-blue-muted) !important; color: var(--brand-blue) !important; font-weight: 600; }
+    .create-grid { margin-top: 16px; display: flex; flex-direction: column; gap: 12px; }
+    .create-header h3 { margin: 0; font-size: 15px; font-weight: 700; }
+    .create-header p { margin: 4px 0 0; font-size: 12px; color: var(--text-secondary); }
+    .create-form { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
 
     .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
     .guide { display: flex; flex-direction: column; gap: 12px; min-height: 220px; }
@@ -115,12 +175,16 @@ interface Project {
     .cta mat-icon { font-size: 16px; width: 16px; height: 16px; color: var(--brand-blue); }
   `]
 })
-export class AiFrameworksComponent {
+export class AiFrameworksComponent implements OnInit {
+  private api = inject(ApiService);
+
   projects: Project[] = [
     { id: 'proj-1', name: 'Customer Care Copilot', owner: 'Contact Center', tags: ['LLM', 'RAG', 'Prod'] },
     { id: 'proj-2', name: 'Model Governance API', owner: 'Platform', tags: ['Service', 'API'] },
     { id: 'proj-3', name: 'Analyst Workspace', owner: 'GRC', tags: ['Analytics', 'Internal'] },
   ];
+
+  deployments = signal<McpDeploymentOption[]>([]);
 
   guides: FrameworkGuide[] = [
     {
@@ -168,7 +232,43 @@ export class AiFrameworksComponent {
   selectedProjectId = this.projects[0]?.id;
   selectedProject = computed(() => this.projects.find(p => p.id === this.selectedProjectId));
 
+  form: { name: string; owner: string; tags: string; deploymentId?: string } = {
+    name: '', owner: '', tags: '', deploymentId: undefined,
+  };
+
+  ngOnInit() {
+    this.loadDeployments();
+  }
+
+  loadDeployments() {
+    this.api.listMcpDeployments().subscribe({
+      next: (d: any[]) => {
+        const opts = d.map(x => ({ id: x.id, name: x.name, framework: x.framework, environment: x.environment }));
+        this.deployments.set(opts);
+      },
+      error: () => this.deployments.set([]),
+    });
+  }
+
   reset() {
     this.selectedProjectId = undefined as unknown as string;
+  }
+
+  addProject() {
+    const newProj: Project = {
+      id: crypto.randomUUID(),
+      name: this.form.name.trim(),
+      owner: this.form.owner.trim(),
+      tags: this.form.tags.split(',').map(t => t.trim()).filter(Boolean),
+      deploymentId: this.form.deploymentId,
+    };
+    this.projects = [...this.projects, newProj];
+    this.selectedProjectId = newProj.id;
+    this.form = { name: '', owner: '', tags: '', deploymentId: undefined };
+  }
+
+  displayDeployment(id?: string): string {
+    const d = this.deployments().find(x => x.id === id);
+    return d ? `${d.name}` : '';
   }
 }

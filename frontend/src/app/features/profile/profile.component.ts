@@ -73,13 +73,24 @@ import { UserService, UserProfile } from '../../core/services/user.service';
                 <mat-label>Full Name</mat-label>
                 <input matInput [(ngModel)]="regForm.full_name" />
               </mat-form-field>
-              <mat-form-field appearance="outline">
+              <mat-form-field appearance="outline"
+                [matTooltip]="pwTooltip" matTooltipPosition="right" matTooltipClass="pw-tooltip">
                 <mat-label>Password</mat-label>
                 <input matInput [(ngModel)]="regForm.password" type="password"
-                       (keydown.enter)="register()" />
+                       (keydown.enter)="register()" (ngModelChange)="onRegPwChange($event)" />
               </mat-form-field>
+              <!-- Live complexity checklist -->
+              @if (regForm.password && !isDefaultAdmin(regForm.email)) {
+                <div class="pw-rules">
+                  <div class="rule" [class.ok]="pwChecks(regForm.password).len"><mat-icon>{{ pwChecks(regForm.password).len ? 'check_circle' : 'cancel' }}</mat-icon> At least 10 characters</div>
+                  <div class="rule" [class.ok]="pwChecks(regForm.password).upper"><mat-icon>{{ pwChecks(regForm.password).upper ? 'check_circle' : 'cancel' }}</mat-icon> Uppercase letter (A-Z)</div>
+                  <div class="rule" [class.ok]="pwChecks(regForm.password).lower"><mat-icon>{{ pwChecks(regForm.password).lower ? 'check_circle' : 'cancel' }}</mat-icon> Lowercase letter (a-z)</div>
+                  <div class="rule" [class.ok]="pwChecks(regForm.password).digit"><mat-icon>{{ pwChecks(regForm.password).digit ? 'check_circle' : 'cancel' }}</mat-icon> Number (0-9)</div>
+                  <div class="rule" [class.ok]="pwChecks(regForm.password).special"><mat-icon>{{ pwChecks(regForm.password).special ? 'check_circle' : 'cancel' }}</mat-icon> Special character (!&#64;#$%…)</div>
+                </div>
+              }
               <button mat-flat-button color="primary" class="auth-btn" (click)="register()"
-                      [disabled]="!regForm.email || !regForm.password"
+                      [disabled]="!regForm.email || !regForm.password || !pwValid(regForm.email, regForm.password)"
                       matTooltip="Register a new account. The first registered user is automatically an admin.">
                 <mat-icon>person_add</mat-icon> Create Account
               </button>
@@ -167,23 +178,33 @@ import { UserService, UserProfile } from '../../core/services/user.service';
 
         <!-- Change Password -->
         <mat-card class="section-card">
-          <h3 matTooltip="Update your account password"><mat-icon>lock</mat-icon> Change Password</h3>
+          <h3 [matTooltip]="pwTooltip" matTooltipPosition="right"><mat-icon>lock</mat-icon> Change Password</h3>
           <mat-divider></mat-divider>
           <div class="form-row">
             <mat-form-field appearance="outline">
               <mat-label>Current Password</mat-label>
               <input matInput [(ngModel)]="pwForm.current" type="password" />
             </mat-form-field>
-            <mat-form-field appearance="outline">
+            <mat-form-field appearance="outline"
+              [matTooltip]="pwTooltip" matTooltipPosition="right" matTooltipClass="pw-tooltip">
               <mat-label>New Password</mat-label>
               <input matInput [(ngModel)]="pwForm.newPw" type="password" />
             </mat-form-field>
             <button mat-flat-button color="warn" (click)="changePassword()"
-                    [disabled]="!pwForm.current || !pwForm.newPw"
+                    [disabled]="!pwForm.current || !pwForm.newPw || !pwValid(profile?.email || '', pwForm.newPw)"
                     matTooltip="Confirm password change">
               Change
             </button>
           </div>
+          @if (pwForm.newPw && profile && !isDefaultAdmin(profile.email)) {
+            <div class="pw-rules">
+              <div class="rule" [class.ok]="pwChecks(pwForm.newPw).len"><mat-icon>{{ pwChecks(pwForm.newPw).len ? 'check_circle' : 'cancel' }}</mat-icon> At least 10 characters</div>
+              <div class="rule" [class.ok]="pwChecks(pwForm.newPw).upper"><mat-icon>{{ pwChecks(pwForm.newPw).upper ? 'check_circle' : 'cancel' }}</mat-icon> Uppercase letter (A-Z)</div>
+              <div class="rule" [class.ok]="pwChecks(pwForm.newPw).lower"><mat-icon>{{ pwChecks(pwForm.newPw).lower ? 'check_circle' : 'cancel' }}</mat-icon> Lowercase letter (a-z)</div>
+              <div class="rule" [class.ok]="pwChecks(pwForm.newPw).digit"><mat-icon>{{ pwChecks(pwForm.newPw).digit ? 'check_circle' : 'cancel' }}</mat-icon> Number (0-9)</div>
+              <div class="rule" [class.ok]="pwChecks(pwForm.newPw).special"><mat-icon>{{ pwChecks(pwForm.newPw).special ? 'check_circle' : 'cancel' }}</mat-icon> Special character (!&#64;#$%…)</div>
+            </div>
+          }
           @if (pwMsg) { <p class="success-msg">{{ pwMsg }}</p> }
           @if (pwError) { <p class="error-msg">{{ pwError }}</p> }
         </mat-card>
@@ -265,6 +286,14 @@ import { UserService, UserProfile } from '../../core/services/user.service';
       margin: 0; font-size: 15px; color: var(--text-primary);
     }
     .section-card h3 mat-icon { font-size: 20px; width: 20px; height: 20px; color: var(--brand-blue); }
+
+    .pw-rules { display: flex; flex-direction: column; gap: 4px; margin: -4px 0 4px; }
+    .rule {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 12px; color: #C62828;
+      mat-icon { font-size: 15px; width: 15px; height: 15px; color: #C62828; }
+    }
+    .rule.ok { color: #2E7D32; mat-icon { color: #2E7D32; } }
   `]
 })
 export class ProfileComponent implements OnInit {
@@ -281,6 +310,18 @@ export class ProfileComponent implements OnInit {
   pwForm = { current: '', newPw: '' };
   pwMsg = '';
   pwError = '';
+
+  private readonly DEFAULT_ADMIN = 'parmeshwr.prasad@gmail.com';
+
+  readonly pwTooltip = [
+    'Password requirements:',
+    '• Minimum 10 characters (longer is better)',
+    '• Mix uppercase + lowercase letters',
+    '• At least one number (0–9)',
+    '• At least one special character: ! @ # $ % ^ & * etc.',
+    '• Avoid personal info, dictionary words, or sequences like "12345"',
+    '• Tip: Use a passphrase e.g. "CorrectHorseBatteryStaple@1"',
+  ].join('\n');
 
   private avatarColors = ['#1565C0', '#6A1B9A', '#2E7D32', '#C62828', '#EF6C00', '#283593', '#00838F', '#4E342E'];
 
@@ -337,6 +378,28 @@ export class ProfileComponent implements OnInit {
       error: (err: any) => this.pwError = err?.error?.detail || 'Failed to change password',
     });
   }
+
+  isDefaultAdmin(email: string): boolean {
+    return (email || '').toLowerCase() === this.DEFAULT_ADMIN.toLowerCase();
+  }
+
+  pwChecks(pw: string): { len: boolean; upper: boolean; lower: boolean; digit: boolean; special: boolean } {
+    return {
+      len:     pw.length >= 10,
+      upper:   /[A-Z]/.test(pw),
+      lower:   /[a-z]/.test(pw),
+      digit:   /\d/.test(pw),
+      special: /[!@#$%^&*()\-_=+\[\]{};:'",.<>/?\\|`~]/.test(pw),
+    };
+  }
+
+  pwValid(email: string, pw: string): boolean {
+    if (this.isDefaultAdmin(email)) return true;
+    const c = this.pwChecks(pw);
+    return c.len && c.upper && c.lower && c.digit && c.special;
+  }
+
+  onRegPwChange(_val: string): void {}
 
   getInitials(name: string): string {
     return name.split(/[\s@]+/).slice(0, 2).map(s => s[0] || '').join('').toUpperCase();

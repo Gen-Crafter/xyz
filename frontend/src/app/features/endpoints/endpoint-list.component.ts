@@ -58,7 +58,7 @@ import { ApiService } from '../../core/services/api.service';
     @if (showForm) {
       <mat-card class="form-card">
         <h3><mat-icon>rocket_launch</mat-icon> Register New AI Deployment</h3>
-        <p class="form-desc">Register your AI application to get an MCP connection config. The governance server will automatically scan all requests for compliance.</p>
+        <p class="form-desc">Register your AI application to get an MCP connection config. GenCrafter will automatically scan all requests for compliance.</p>
         <mat-divider></mat-divider>
         <div class="form-grid">
           <mat-form-field appearance="outline">
@@ -115,7 +115,7 @@ import { ApiService } from '../../core/services/api.service';
           <h3><mat-icon>integration_instructions</mat-icon> MCP Connection Config — {{ configPanel.name }}</h3>
           <button mat-icon-button (click)="configPanel = null" matTooltip="Close"><mat-icon>close</mat-icon></button>
         </div>
-        <p class="config-desc">Use one of the snippets below to connect your AI agent to the governance MCP server.</p>
+        <p class="config-desc">Use one of the snippets below to connect your AI agent to the GenCrafter MCP server.</p>
 
         <mat-tab-group animationDuration="200ms">
           <mat-tab label="Python (MCP Client)">

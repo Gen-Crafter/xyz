@@ -558,7 +558,7 @@ export class LiveMonitorComponent implements OnInit, OnDestroy {
       doc.setFontSize(7);
       doc.setFont('helvetica', 'normal');
       doc.setTextColor(153, 153, 153);
-      doc.text('AI Governance Proxy  |  CONFIDENTIAL', M, 287);
+      doc.text('GenCrafter  |  CONFIDENTIAL', M, 287);
       doc.setDrawColor(...brandBlue);
       doc.text(`Page ${pageNum}`, W - M - 12, 287);
       doc.setDrawColor(0, 118, 206);
@@ -575,16 +575,16 @@ export class LiveMonitorComponent implements OnInit, OnDestroy {
     doc.setFontSize(10);
     doc.setFont('helvetica', 'bold');
     doc.setTextColor(255, 255, 255);
-    doc.text('AI GOVERNANCE', M, 14);
+    doc.text('GENCRAFTER', M, 14);
 
     doc.setFontSize(20);
     doc.setFont('helvetica', 'bold');
-    doc.text('AI Governance Compliance Report', M, 26);
+    doc.text('GenCrafter Compliance Report', M, 26);
 
     doc.setFontSize(9);
     doc.setFont('helvetica', 'normal');
     doc.setTextColor(200, 225, 255);
-    doc.text('Enterprise Compliance Proxy — Automated Scan Results', M, 33);
+    doc.text('Enterprise Compliance — Automated Scan Results', M, 33);
 
     y = 52;
 
