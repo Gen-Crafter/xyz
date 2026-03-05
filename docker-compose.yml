@@ -1,5 +1,4 @@
 services:
-  # FastAPI Backend
   api:
     build:
       context: ./backend
@@ -40,8 +39,6 @@ services:
       - hf_cache:/root/.cache/huggingface
     restart: unless-stopped
 
-  # Ollama — local open-source LLM (no auth required)
-  # Auto-pulls the model on first startup via entrypoint script.
   ollama:
     image: ollama/ollama:latest
     ports:
@@ -55,13 +52,7 @@ services:
     volumes:
       - ollama_data:/root/.ollama
       - ./ollama-entrypoint.sh:/ollama-entrypoint.sh:ro
-      # Optional: mount a corporate CA bundle if needed
-      # - /usr/local/share/ca-certificates/Corp_CA_bundle.crt:/usr/local/share/ca-certificates/Corp_CA_bundle.crt:ro
     restart: unless-stopped
-    deploy:
-      resources:
-        reservations:
-          memory: 4G
     healthcheck:
       test: ["CMD-SHELL", "ollama list | grep -q 'llama3.2:3b' || exit 1"]
       interval: 15s
@@ -69,7 +60,6 @@ services:
       retries: 20
       start_period: 120s
 
-  # MITM Proxy — intercepts real AI traffic for compliance checking
   mitm-proxy:
     build:
       context: ./proxy
@@ -78,18 +68,20 @@ services:
       - "8080:8080"
     volumes:
       - ./proxy/mitm_addon.py:/proxy/mitm_addon.py
-      # Optional: mount a corporate CA bundle if needed
-      # - /usr/local/share/ca-certificates/Corp_CA_bundle.crt:/usr/local/share/ca-certificates/Corp_CA_bundle.crt:ro
     environment:
       - SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
       - REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
       - PYTHONUNBUFFERED=1
-    command: ["sh", "-c", "update-ca-certificates 2>/dev/null && exec mitmdump -s mitm_addon.py --listen-port 8080 --set api_url=http://api:8000 --set ssl_insecure=true"]
+    command: >
+      sh -c "update-ca-certificates 2>/dev/null &&
+      exec mitmdump -s mitm_addon.py
+      --listen-port 8080
+      --set api_url=http://api:8000
+      --set ssl_insecure=true"
     depends_on:
       - api
     restart: unless-stopped
 
-  # Angular Frontend
   frontend:
     build:
       context: ./frontend
@@ -104,16 +96,6 @@ services:
       - api
     restart: unless-stopped
 
-  certbot:
-    image: certbot/certbot:latest
-    volumes:
-      - letsencrypt:/etc/letsencrypt
-      - certbot_webroot:/var/www/certbot
-    depends_on:
-      - frontend
-    restart: unless-stopped
-
-  # PostgreSQL Database
   postgres:
     image: postgres:17-alpine
     ports:
@@ -132,14 +114,12 @@ services:
       start_period: 10s
     restart: unless-stopped
 
-  # Redis
   redis:
     image: redis:7.4-alpine
     ports:
       - "6379:6379"
     restart: unless-stopped
 
-  # ChromaDB
   chromadb:
     image: chromadb/chroma:1.5.1
     ports:
