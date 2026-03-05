@@ -20,9 +20,8 @@ export class WebSocketService {
 
   private createConnection(channel: string, subject: Subject<any>) {
     const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-    const host = window.location.hostname;
-    const port = '8000';
-    const url = `${protocol}//${host}:${port}/ws/${channel}`;
+    const host = window.location.host;
+    const url = `${protocol}//${host}/ws/${channel}`;
 
     try {
       const ws = new WebSocket(url);

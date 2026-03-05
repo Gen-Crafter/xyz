@@ -3,8 +3,8 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
-    ports:
-      - "8000:8000"
+    expose:
+      - "8000"
     environment:
       - DATABASE_URL=postgresql+asyncpg://aigp:aigp_password@postgres:5432/aigp_db
       - REDIS_URL=redis://redis:6379
@@ -41,8 +41,8 @@ services:
 
   ollama:
     image: ollama/ollama:latest
-    ports:
-      - "11434:11434"
+    expose:
+      - "11434"
     environment:
       - OLLAMA_HOST=0.0.0.0
       - OLLAMA_MODEL=llama3.2:3b
@@ -64,8 +64,8 @@ services:
     build:
       context: ./proxy
       dockerfile: Dockerfile
-    ports:
-      - "8080:8080"
+    expose:
+      - "8080"
     volumes:
       - ./proxy/mitm_addon.py:/proxy/mitm_addon.py
     environment:
@@ -98,8 +98,8 @@ services:
 
   postgres:
     image: postgres:17-alpine
-    ports:
-      - "5432:5432"
+    expose:
+      - "5432"
     environment:
       - POSTGRES_USER=aigp
       - POSTGRES_PASSWORD=aigp_password
@@ -116,14 +116,14 @@ services:
 
   redis:
     image: redis:7.4-alpine
-    ports:
-      - "6379:6379"
+    expose:
+      - "6379"
     restart: unless-stopped
 
   chromadb:
     image: chromadb/chroma:1.5.1
-    ports:
-      - "8001:8000"
+    expose:
+      - "8000"
     volumes:
       - chroma_data:/chroma/chroma
     environment:
