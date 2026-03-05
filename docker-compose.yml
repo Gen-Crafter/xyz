@@ -12,7 +12,7 @@ services:
       - CHROMA_HOST=chromadb
       - CHROMA_PORT=8000
       - CHROMA_COLLECTION=aigp_regulations
-      - CORS_ORIGINS=http://localhost:4200,http://*
+      - CORS_ORIGINS=http://localhost:4200,https://ai.gencrafter.io,http://*
       - AUTH_TOKEN=demo-token-for-hackathon
       - LOG_LEVEL=INFO
       - OLLAMA_BASE_URL=http://ollama:11434
@@ -95,9 +95,22 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
     ports:
-      - "4200:80"
+      - "80:80"
+      - "443:443"
+    volumes:
+      - letsencrypt:/etc/letsencrypt
+      - certbot_webroot:/var/www/certbot
     depends_on:
       - api
+    restart: unless-stopped
+
+  certbot:
+    image: certbot/certbot:latest
+    volumes:
+      - letsencrypt:/etc/letsencrypt
+      - certbot_webroot:/var/www/certbot
+    depends_on:
+      - frontend
     restart: unless-stopped
 
   # PostgreSQL Database
@@ -142,3 +155,5 @@ volumes:
   chroma_data:
   ollama_data:
   hf_cache:
+  letsencrypt:
+  certbot_webroot:
