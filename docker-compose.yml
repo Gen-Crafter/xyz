@@ -5,6 +5,8 @@ services:
       dockerfile: Dockerfile
     expose:
       - "8000"
+    mem_limit: 1200m
+    cpus: "0.85"
     environment:
       - DATABASE_URL=postgresql+asyncpg://aigp:aigp_password@postgres:5432/aigp_db
       - REDIS_URL=redis://redis:6379
@@ -43,6 +45,8 @@ services:
     image: ollama/ollama:latest
     expose:
       - "11434"
+    mem_limit: 2000m
+    cpus: "1.00"
     environment:
       - OLLAMA_HOST=0.0.0.0
       - OLLAMA_MODEL=llama3.2:3b
@@ -66,6 +70,8 @@ services:
       dockerfile: Dockerfile
     expose:
       - "8080"
+    mem_limit: 160m
+    cpus: "0.10"
     volumes:
       - ./proxy/mitm_addon.py:/proxy/mitm_addon.py
     environment:
@@ -89,6 +95,8 @@ services:
     ports:
       - "80:80"
       - "443:443"
+    mem_limit: 150m
+    cpus: "0.15"
     volumes:
       - letsencrypt:/etc/letsencrypt
       - certbot_webroot:/var/www/certbot
@@ -100,6 +108,8 @@ services:
     image: postgres:17-alpine
     expose:
       - "5432"
+    mem_limit: 420m
+    cpus: "0.20"
     environment:
       - POSTGRES_USER=aigp
       - POSTGRES_PASSWORD=aigp_password
@@ -118,12 +128,16 @@ services:
     image: redis:7.4-alpine
     expose:
       - "6379"
+    mem_limit: 100m
+    cpus: "0.05"
     restart: unless-stopped
 
   chromadb:
     image: chromadb/chroma:1.5.1
     expose:
       - "8000"
+    mem_limit: 500m
+    cpus: "0.15"
     volumes:
       - chroma_data:/chroma/chroma
     environment:
